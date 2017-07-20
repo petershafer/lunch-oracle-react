@@ -25,8 +25,8 @@ const stores = () => {
         });
         break;
       case "configloaded":
-        state.choices = data[0].map((choice) => (Object.assign(choice, { 'available': true })));
-        state.options = data[1].map((option) => ({ 'name': option, 'active': false }));
+        state.choices = data[0].map((choice) => (Object.assign(choice, { 'available': true, 'index': index })));
+        state.options = data[1].map((option) => ({ 'name': option, 'active': false, 'index': index }));
         state.dataloaded = true;
         break;
       case "toggleoption":
