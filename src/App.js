@@ -15,13 +15,7 @@ import {
 import stores from './app/stores';
 import actions from './app/actions';
 import Home from './views/home';
-
-
-const ChoiceDetail = ({ match }) => (
-  <div>
-    <h3>-{match.params.choiceId}-</h3>
-  </div>
-)
+import ChoiceDetail from './views/choicedetail';
 
 class App extends Component {
   constructor(props) {
