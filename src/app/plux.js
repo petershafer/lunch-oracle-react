@@ -19,7 +19,9 @@ const plux = (() => {
   };
   const unsubscribe = (storeName, id) => {
     let subscriptionIndex = stores[storeName].subscriptions.findIndex((entry) => entry[0] == id);
-    stores[storeName].subscriptions.splice(subscriptionIndex, 1);
+    if(subscriptionIndex >= 0){
+      stores[storeName].subscriptions.splice(subscriptionIndex, 1);
+    }
   };
   const executeNotification = (filter, state, callback) => {
     const results = filter ? filter(state) : state;
@@ -68,9 +70,7 @@ const plux = (() => {
     // Register an action that's available for views to trigger.
     'createAction': (name) => (data) => dispatch(name, data),
     // Allow retrieval of state of specified store
-    'getState': (name) => {
-      return Object.assign({}, (stores[name] ? stores[name].state : {}))
-    }
+    'getState': (name) => Object.assign({}, (stores[name] ? stores[name].state : {}))
   }
   return API;
 })();

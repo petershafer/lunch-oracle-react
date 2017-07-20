@@ -8,6 +8,7 @@ import {
   Collapse,
   Glyphicon
 } from 'react-bootstrap';
+import { Link } from 'react-router-dom';
 import actions from '../app/actions';
 
 
@@ -44,12 +45,11 @@ class Home extends Component {
             <Col md={2} >
               <ul className="optionMenu">
                 <li><Button bsSize="xsmall" bsStyle="danger" onClick={ this.clearOptions.bind(this) } block><Glyphicon glyph="remove" /> Clear</Button></li>
-                { this.state.options.map((option) => <Option name={option.name} active={option.active} key={option.name} />) }
+                { this.state.options.map((option) => <Option name={option.name} active={option.active} key={option.index} />) }
               </ul>
             </Col>
             <Col md={10}>
-              { /*this.state.choices.filter(choice => choice.available).map((choice) => <Choice key={choice.name} name={choice.name} />)*/ }
-              { this.state.choices.map((choice) => <Choice key={choice.name} name={choice.name} active={choice.available} />) }
+              { this.state.choices.map((choice) => <Choice key={choice.index} id={choice.index} name={choice.name} active={choice.available} />) }
               { this.state.choices.filter(choice => choice.available).length == 0 ? <p>No choices!</p> : null }
             </Col>
           </Row>
@@ -92,7 +92,7 @@ class Choice extends Component {
     return (
       <Collapse in={this.props.active}>
         <div>
-          <p>{this.props.name}</p>
+          <p><Link to={`/choice/${this.props.id}`}>{this.props.name}</Link></p>
         </div>
       </Collapse>
     )

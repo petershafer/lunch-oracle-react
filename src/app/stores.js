@@ -25,8 +25,8 @@ const stores = () => {
         });
         break;
       case "configloaded":
-        state.choices = data[0].map((choice) => (Object.assign(choice, { 'available': true, 'index': index })));
-        state.options = data[1].map((option) => ({ 'name': option, 'active': false, 'index': index }));
+        state.choices = data[0].map((choice, index) => (Object.assign(choice, { 'available': true, 'index': index })));
+        state.options = data[1].map((option, index) => ({ 'name': option, 'active': false, 'index': index }));
         state.dataloaded = true;
         break;
       case "toggleoption":
@@ -37,6 +37,22 @@ const stores = () => {
       case "clearoptions":
         state.options.forEach((option) => option.active = false);
         updateChoices();
+        break;
+      case "loaddetails":
+        fetch('/details.json').then((values) => {
+          values.json().then((details) => {
+            const actualDetails = state.choices.find((choice) => choice.index == data);
+            actions.detailsloaded(actualDetails);
+          });
+        });
+        break;
+      case "detailsloaded":
+        state.details = data;
+        state.detailsloaded = true;
+        break;
+      case "cleardetails":
+        state.details = {};
+        state.detailsloaded = false;
         break;
     }
   }, {
