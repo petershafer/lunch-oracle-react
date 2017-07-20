@@ -4,7 +4,8 @@ import {
   Grid,
   Row,
   Col,
-  Button
+  Button,
+  Collapse
 } from 'react-bootstrap';
 import actions from '../app/actions';
 
@@ -39,7 +40,8 @@ class Home extends Component {
               { this.state.options.map((option) => <Option name={option.name} active={option.active} key={option.name} />) }
             </Col>
             <Col md={10}>
-              { this.state.choices.filter(choice => choice.available).map((choice) => <Choice key={choice.name} name={choice.name} />) }
+              { /*this.state.choices.filter(choice => choice.available).map((choice) => <Choice key={choice.name} name={choice.name} />)*/ }
+              { this.state.choices.map((choice) => <Choice key={choice.name} name={choice.name} active={choice.available} />) }
               { this.state.choices.filter(choice => choice.available).length == 0 ? <p>No choices!</p> : null }
             </Col>
           </Row>
@@ -82,7 +84,9 @@ class Choice extends Component {
 
   render() {
     return (
-      <p>{this.props.name}</p>
+      <Collapse in={this.props.active}>
+        <p>{this.props.name}</p>
+      </Collapse>
     )
   }
 }
