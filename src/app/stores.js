@@ -34,6 +34,10 @@ const stores = () => {
         state.options[index].active = !state.options[index].active;
         updateChoices();
         break;
+      case "clearoptions":
+        state.options.forEach((option) => option.active = false);
+        updateChoices();
+        break;
     }
   }, {
     'dataloaded': false,

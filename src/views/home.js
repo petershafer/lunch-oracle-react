@@ -5,7 +5,8 @@ import {
   Row,
   Col,
   Button,
-  Collapse
+  Collapse,
+  Glyphicon
 } from 'react-bootstrap';
 import actions from '../app/actions';
 
@@ -29,6 +30,10 @@ class Home extends Component {
 
   componentWillUnmount() {
     this.subscription.unsubscribe();
+  }
+
+  clearOptions() {
+    actions.clearoptions();
   }
 
   render() {
