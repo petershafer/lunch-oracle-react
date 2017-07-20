@@ -37,7 +37,10 @@ class Home extends Component {
         <Grid>
           <Row>
             <Col md={2} >
-              { this.state.options.map((option) => <Option name={option.name} active={option.active} key={option.name} />) }
+              <ul className="optionMenu">
+                <li><Button bsSize="xsmall" bsStyle="danger" onClick={ this.clearOptions.bind(this) } block><Glyphicon glyph="remove" /> Clear</Button></li>
+                { this.state.options.map((option) => <Option name={option.name} active={option.active} key={option.name} />) }
+              </ul>
             </Col>
             <Col md={10}>
               { /*this.state.choices.filter(choice => choice.available).map((choice) => <Choice key={choice.name} name={choice.name} />)*/ }
@@ -66,9 +69,7 @@ class Option extends Component {
 
   render() {
     return (
-      <ul className="optionMenu">
-        <li><Button bsSize="xsmall" bsStyle={this.props.active ? 'primary' : 'default'} active={this.props.active} onClick={ this.handleClick.bind(this) } block>{ this.props.name }</Button></li>
-      </ul>
+      <li><Button bsSize="xsmall" bsStyle={this.props.active ? 'primary' : 'default'} active={this.props.active} onClick={ this.handleClick.bind(this) } block>{ this.props.name }</Button></li>
     )
   }
 }
@@ -85,7 +86,9 @@ class Choice extends Component {
   render() {
     return (
       <Collapse in={this.props.active}>
-        <p>{this.props.name}</p>
+        <div>
+          <p>{this.props.name}</p>
+        </div>
       </Collapse>
     )
   }
